@@ -34,3 +34,22 @@ The ESP32 runs a very very simple routine:
 ## Attiny85
 
 TODO
+
+## HomeAssistant
+
+To setup the sensor in HomeAssistant, start by installing an MQTT broker if you don't already have one : https://github.com/home-assistant/addons/tree/master/mosquitto. The MQTT integration also needs to be installed, enabled, and setup correctly.
+
+Then, edit the `configuration.yml` file, and add the following: 
+
+```yaml
+sensor:
+  - platform: mqtt
+    state_topic: "energy/gaz_pulse_10_liters"
+    device_class: gas
+    state_class: total_increasing
+    name: Consomation de Gaz
+    unit_of_measurement: "m³"
+    value_template: "{{ value | multiply(0.01) }}"
+```
+
+Note: the `value_template` attribute is used here because our input is 1 pulse per 10L, and we want cubic meters. There's 100 times 10 liters in a cubic meter, so we need to multiply by 0.01 (yay for metric !)
