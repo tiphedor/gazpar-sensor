@@ -1,5 +1,7 @@
 # Gazpar Sensor for HomeAssitant
 
+# WIP !
+
 ![foo](/img/gazpar.jpg "title")
 
 ESP32 + Attiny85 sensor for HomeAssistant to track Gaz consumption by using data port located on the french Gazpar energy meter.
